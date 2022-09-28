@@ -5,7 +5,7 @@ import "./header.css";
 import { dateNow } from "../../utils/constants";
 
 const Header = ({ datas }) => {
-  const date=dateNow();
+  const date = dateNow();
   const currency = (
     <Box sx={{ p: 2 }}>
       <h4>Курс валют на сьогодні - {date}</h4>
