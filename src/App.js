@@ -8,7 +8,7 @@ import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 
 const App = () => {
-  const [datas, setData] = useState({});
+  const [datas, setData] = useState({ error: "1" });
 
   useEffect(() => {
     (async function () {
@@ -17,7 +17,9 @@ const App = () => {
     })();
   }, []);
 
-  if (datas.error !== "") {
+  if (datas.error==="1") {
+    return;
+  } else if (datas.error !== "") {
     return <LoadError />;
   } else
     return (
