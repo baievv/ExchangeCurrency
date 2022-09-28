@@ -26,7 +26,9 @@ const CurrencyCalc = ({ datas }) => {
   const handleChangeBuyCurrency = (event) => {
     setCurrencyBuy(currencies[event.target.value]);
     setSaleCount(
-      onChangeBuy(datas, buyCount, currencySale, currencies[event.target.value])
+      onChangeBuy(datas,
+        buyCount,
+        currencySale, currencies[event.target.value])
     );
   };
 
@@ -62,7 +64,7 @@ const CurrencyCalc = ({ datas }) => {
     setCurrencySale(currencies[0]);
     setCurrencyBuy(currencies[1]);
     setBuyCount(100);
-    let count = datas.usdRate.buy * 100;
+    let count = datas[0].sale * 100;
     setSaleCount(count);
   }, []);
 
@@ -84,7 +86,7 @@ const CurrencyCalc = ({ datas }) => {
           <TextField
             id="standard-helperText"
             label="Обмінюю"
-            defaultValue="100"
+            // defaultValue="100"
             value={saleCount}
             sx={textFieldProp}
             onChange={handleChangeSaleCount}
@@ -93,7 +95,8 @@ const CurrencyCalc = ({ datas }) => {
               currencyBuy.value,
               currencySale.value,
               datas
-            )} ${currencySale.value}`}
+            )}
+              ${currencySale.value}`}
             variant="standard"
           />
           <FormControl variant="standard" sx={selectFieldProp}>
@@ -106,6 +109,7 @@ const CurrencyCalc = ({ datas }) => {
               value={currencySale.value}
               onChange={handleChangeSaleCurrency}
               defaultValue={0}
+              label={10}
             >
               {currencies.map((option) => (
                 <MenuItem key={`s${option.id}`} value={option.id}>
@@ -121,7 +125,7 @@ const CurrencyCalc = ({ datas }) => {
             id="standard-helperText"
             label="Отримаю"
             sx={textFieldProp}
-            defaultValue="0"
+            // defaultValue="0"
             value={buyCount}
             onChange={handleChangeBuyCount}
             onKeyDown={handleBuyCountKeyUp}
@@ -142,7 +146,7 @@ const CurrencyCalc = ({ datas }) => {
               value={currencyBuy.value}
               defaultValue={1}
               onChange={handleChangeBuyCurrency}
-              label={10}
+              label={0}
             >
               {currencies.map((option) => (
                 <MenuItem key={`b${option.id}`} value={option.id}>
