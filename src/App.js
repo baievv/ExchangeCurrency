@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState, useEffect } from "react";
+import CurrencyCalc from "./components/currency-calc";
+import Header from "./components/header";
+import LoadError from "./components/load-error";
+import currencyLoader from "./utils/currency-loader";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const [datas, setData] = useState({});
+
+  useEffect(() => {
+    (async function () {
+      let response = await currencyLoader();
+      setData(response);
+    })();
+  }, []);
+
+  if (datas.error !== "") {
+    return <LoadError />;
+  } else
+    return (
+      <Box className="container">
+        <Paper>
+          <Header datas={datas} />
+          <CurrencyCalc datas={datas} />
+        </Paper>
+      </Box>
+    );
+};
 
 export default App;
